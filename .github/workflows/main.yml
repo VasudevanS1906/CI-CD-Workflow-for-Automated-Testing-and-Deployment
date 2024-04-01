@@ -39,7 +39,7 @@ jobs:
         pip install -r requirements.txt
     - name: Install PythonAnywhere module
       run: |
-        pip install pythonanywhere
+        /home/runner/work/CI-CD-workflow/CI-CD-workflow/venv/bin/python -m pip install pythonanywhere
 
     -name: Deploy to PythonAnywhere
      env:
