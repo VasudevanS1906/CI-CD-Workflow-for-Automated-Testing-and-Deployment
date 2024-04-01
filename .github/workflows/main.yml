@@ -48,4 +48,4 @@ jobs:
         run: |
           python3 -m pip install pythonanywhere
           python3 manage.py migrate --no-input
-          python3 wsgi.py
+          
