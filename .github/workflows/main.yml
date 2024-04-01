@@ -38,7 +38,7 @@ jobs:
           pip install -r requirements.txt
           pip install pythonanywhere
       - name: Change working directory
-        run: cd /path/to/your/django/project
+        run: cd django_project
       - name: Deploy to PythonAnywhere
         env:
           PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
