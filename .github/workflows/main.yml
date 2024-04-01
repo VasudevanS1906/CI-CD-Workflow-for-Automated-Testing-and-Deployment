@@ -24,26 +24,24 @@ jobs:
         run: python manage.py test
 
   deploy:
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.8
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-      - name: Install PythonAnywhere module
-        run: |
-          pip install pythonanywhere
-      - name: Deploy to PythonAnywhere
-        env:
-          PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
-          PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
-        run: |
-          python -m pythonanywhere sync_with_remote_repo --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD https://github.com/${{ github.repository }}/
-          python -m pythonanywhere manage.py migrate --no-input
-          python -m pythonanywhere wsgi.py
+  needs: test
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pythonanywhere
+    - name: Deploy to PythonAnywhere
+      env:
+        PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
+        PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
+      run: |
+        python -m pythonanywhere --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD sync_with_remote_repo https://github.com/${{ github.repository }}/
+        python -m pythonanywhere --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD manage.py migrate --no-input
+        python -m pythonanywhere --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD wsgi.py
