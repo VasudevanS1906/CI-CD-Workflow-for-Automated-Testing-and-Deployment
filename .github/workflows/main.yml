@@ -42,6 +42,5 @@ jobs:
           PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
           PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
         run: |
-          python -m pythonanywhere --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD sync_with_remote_repo https://github.com/${{ github.repository }}/
-          python -m pythonanywhere --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD manage.py migrate --no-input
-          python -m pythonanywhere --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD wsgi.py
+          /opt/hostedtoolcache/Python/3.8.18/x64/bin/python manage.py migrate --no-input
+          /opt/hostedtoolcache/Python/3.8.18/x64/bin/python wsgi.py
