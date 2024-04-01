@@ -42,5 +42,6 @@ jobs:
           PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
           PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
         run: |
-          /opt/hostedtoolcache/Python/3.8.18/x64/bin/python manage.py migrate --no-input
-          /opt/hostedtoolcache/Python/3.8.18/x64/bin/python django_project/wsgi.py
+          python3 -m pip install pythonanywhere
+          python3 manage.py migrate --no-input
+          python3 wsgi.py
