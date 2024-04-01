@@ -40,7 +40,7 @@ jobs:
       - name: Print working directory
         run: pwd
       - name: Change working directory
-        run: cd /home/runner/work/CI-CD-workflow/CI-CD-workflow/django_project
+        run: cd /home/runner/work/CI-CD-workflow/django_project
       - name: Deploy to PythonAnywhere
         env:
           PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
