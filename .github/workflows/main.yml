@@ -45,7 +45,7 @@ jobs:
         PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
         PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
       run: |
-        pip install pythonanywhere
+        
         venv/bin/python -m pythonanywhere sync_with_remote_repo --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD https://github.com/${{ github.repository }}
         venv/bin/pythonanywhere manage.py migrate --no-input
         venv/bin/pythonanywhere wsgi.py
