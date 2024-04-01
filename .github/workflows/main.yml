@@ -1,0 +1,51 @@
+name: Django CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+        no-virtualenv: true
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run tests
+      run: python manage.py test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Deploy to PythonAnywhere
+      env:
+        PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
+        PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
+      run: |
+        pip install pythonanywhere
+        venv/bin/python -m pythonanywhere sync_with_remote_repo --username $PYTHONANYWHERE_USER --password $PYTHONANYWHERE_PASSWORD https://github.com/${{ github.repository }}
+        venv/bin/pythonanywhere manage.py migrate --no-input
+        venv/bin/pythonanywhere wsgi.py
