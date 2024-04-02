@@ -48,7 +48,6 @@ jobs:
           PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
         run: |
           python3 -m pip install pythonanywhere
-          python3 manage.py collectstatic --no-input
-          python3 manage.py migrate
-          python3 manage.py restart_server
+          python3 manage.py migrate --no-input
+        
           
