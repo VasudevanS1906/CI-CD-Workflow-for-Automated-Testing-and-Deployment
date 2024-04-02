@@ -1,0 +1,53 @@
+name: Django CI/CD
+
+on:
+  push:
+    branches: [ repl ]
+  pull_request:
+    branches: [ repl ]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10.12
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run tests
+        run: python manage.py test
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.10.12
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pythonanywhere
+      - name: Print working directory
+        run: pwd
+      - name: Change working directory
+        run: cd /home/runner/work/CI-CD-workflow/CI-CD-workflow
+      
+      - name: Deploy to PythonAnywhere
+        env:
+          PYTHONANYWHERE_USER: ${{ secrets.PYTHONANYWHERE_USER }}
+          PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
+        run: |
+          python3 -m pip install pythonanywhere
+          python3 manage.py migrate --no-input
+        
+          
