@@ -49,7 +49,7 @@ jobs:
         run: |
           python3 -m pip install pythonanywhere
           python3 manage.py migrate --no-input
-          python manage.py runserver --noreload
+          python manage.py runserver --noreload --stop
           python manage.py collectstatic
           python manage.py migrate
         
