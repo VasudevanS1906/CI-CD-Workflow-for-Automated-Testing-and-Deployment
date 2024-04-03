@@ -39,7 +39,8 @@ jobs:
           pip install pythonanywhere
       - name: Print working directory
         run: pwd
-      
+      - name: Change working directory
+        run: cd /home/runner/work/CI-CD-Workflow-for-Automated-Testing-and-Deployment/CI-CD-Workflow-for-Automated-Testing-and-Deployment
       
       
       - name: Deploy to PythonAnywhere
