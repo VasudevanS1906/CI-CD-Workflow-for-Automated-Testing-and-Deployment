@@ -51,6 +51,7 @@ jobs:
           PYTHONANYWHERE_PASSWORD: ${{ secrets.PYTHONANYWHERE_PASSWORD }}
         run: |
           python3 -m pip install pythonanywhere
+          python3 /home/runner/work/CI-CD-Workflow-for-Automated-Testing-and-Deployment/CI-CD-Workflow-for-Automated-Testing-and-Deployment/pa_autoconfigure_django.py --python=3.10 --domain=quinitin.pythonanywhere.com
           python3 manage.py migrate --no-input
           
         
