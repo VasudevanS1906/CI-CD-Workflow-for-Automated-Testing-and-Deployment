@@ -41,7 +41,9 @@ jobs:
         run: pwd
       - name: Change working directory
         run: cd /home/runner/work/CI-CD-Workflow-for-Automated-Testing-and-Deployment/CI-CD-Workflow-for-Automated-Testing-and-Deployment
-      
+      - name: Set STATIC_ROOT
+        run: |
+          echo "STATIC_ROOT=$(pwd)/static" >> settings.py
       
       - name: Deploy to PythonAnywhere
         env:
