@@ -45,15 +45,22 @@ The project serves as a template or starting point for other projects looking to
 # Usage:
 
 1.Make changes to the Python code or the CI/CD workflow configuration in the .github/workflows directory according to your project's requirements.
+
 2.Commit and push your changes to the repository:
 
                                               git add .
                                               git commit -m "Update code or workflow"
                                               git push origin main
+
 3.The CI/CD workflow will automatically trigger based on the configured events (e.g., push to the main branch or pull request creation).
+
 4.Monitor the progress of the workflow by navigating to the "Actions" tab in your GitHub repository.
+
 5.The workflow will execute the defined steps, including running automated tests, performing code quality checks, generating artifacts, and deploying the application (if configured).
+
 6.If any step in the workflow fails, you will receive notifications via the configured channels (e.g., email or Slack) with details about the failure.
+
 7.Review the workflow logs and make necessary adjustments to your code or the workflow configuration to resolve any issues.
+
 8.Once the workflow completes successfully, your application will be deployed to the specified environment, and the generated artifacts will be available for download or further use.
 
